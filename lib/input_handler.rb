@@ -48,6 +48,10 @@ class InputHandler
       puts "Error: input file must have a .txt extension#{"\n" * 2}"
       puts options_parser
       exit 1
+    elsif !File.exist?(file_path)
+      puts "Error: input file does not exist#{"\n" * 2}"
+      puts options_parser
+      exit 1
     end
   end
 end
