@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.7.3'
+ruby '3.2.2'
 
-gem 'rspec'
-gem 'rubocop', '~> 1.16', require: false
-gem 'rubocop-rspec', '~> 2.3.0', require: false
+gem 'rspec', '~> 3.12'
+
+gem 'rubocop', '~> 1.53'
+
+gem 'factory_bot', '~> 6.2'
+
+gem 'rubocop-rspec', '~> 2.22'
