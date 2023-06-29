@@ -24,10 +24,19 @@ RSpec.describe Roll do
         expect(roll.pins).to eq(0)
       end
 
-      it 'raises an ArgumentError for an invalid input' do
-        expect { described_class.new('11') }.to raise_error(ArgumentError, /Invalid input: 11/)
-        expect { described_class.new('-1') }.to raise_error(ArgumentError, /Invalid input: -1/)
-        expect { described_class.new('X') }.to raise_error(ArgumentError, /Invalid input: X/)
+      it 'raises an ArgumentError for an invalid input greater than 10' do
+        input = Random.rand(11..999).to_s
+        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
+      end
+
+      it 'raises an ArgumentError for an invalid input less than 0' do
+        input = Random.rand(-999...0).to_s
+        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
+      end
+
+      it 'raises an ArgumentError for an invalid character input' do
+        input = ('A'..'Z').to_a.sample
+        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
       end
     end
   end

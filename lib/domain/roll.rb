@@ -2,13 +2,13 @@ class Roll
   attr_reader :pins, :attempt
 
   VALID_INPUT_REGEX = /(^[0-9]$)|(F)|(^[1][0]$)/
-  FOUL_INPUT = 'F'
+  FOUL_INPUT = 'F'.freeze
 
   def initialize(attempt)
     raise ArgumentError, "Invalid input: #{attempt}" unless validate_input(attempt)
 
     @attempt = attempt.freeze
-    @pins = parse_pins(@attempt).freeze
+    @pins ||= parse_pins(@attempt).freeze
   end
 
   private
