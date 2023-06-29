@@ -1,0 +1,32 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Ignore the default coverage directory.
+/coverage
+
+# Ignore the default public/uploads directory.
+/public/uploads
+
+# Ignore the default vendor/bundle directory.
+/vendor/bundle
+
+# Ignore the default .env file.
+.env
+
+# Ignore any local configuration files.
+/config/*.local.yml
+
+# Ignore any generated files.
+/bin/*
+!/bin/.keep
+
+# Ignore RSpec files
+/spec/examples.txt
