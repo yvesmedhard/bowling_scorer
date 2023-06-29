@@ -8,6 +8,14 @@ RSpec.describe InputHandler do
         input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt'])
         expect(input_handler.file_path).to eq('spec/fixtures/positive/perfect.txt')
       end
+
+      it 'sets the input_data attribute with file contents' do
+        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt'])
+        expected = {
+          "Carl" => ["10"] * 12
+        }
+        expect(input_handler.input_data).to eq(expected)
+      end
     end
 
     context 'with missing file argument' do

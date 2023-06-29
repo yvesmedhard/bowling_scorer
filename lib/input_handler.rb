@@ -1,7 +1,7 @@
 require 'optparse'
 
 class InputHandler
-  attr_reader :file_path
+  attr_reader :file_path, :input_data
 
   def initialize(args)
     @options = { file_path: nil }
@@ -10,6 +10,7 @@ class InputHandler
     validate_file_input(@options[:file_path])
 
     @file_path = @options[:file_path]
+    @input_data = read_input_file(@options[:file_path])
   end
 
   private
@@ -53,5 +54,18 @@ class InputHandler
       puts options_parser
       exit 1
     end
+  end
+
+  def read_input_file(file_path)
+    input_data = Hash.new {|hash, key| hash[key] = []}
+    File.foreach(file_path) do |line|
+      values = line.chomp.split("\t")
+      if values.size != 2
+        puts "Error: invalid input format"
+        exit 1
+      end
+      input_data[values[0]] << values[1]
+    end
+    input_data
   end
 end
