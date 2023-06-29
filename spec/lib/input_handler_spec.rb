@@ -12,7 +12,7 @@ RSpec.describe InputHandler do
       it 'sets the input_data attribute with file contents' do
         input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt'])
         expected = {
-          "Carl" => ["10"] * 12
+          'Carl' => ['10'] * 12
         }
         expect(input_handler.input_data).to eq(expected)
       end
@@ -35,11 +35,11 @@ RSpec.describe InputHandler do
       end
     end
 
-    context "with non-existent file path" do
-      it "prints an error message and exits" do
-        expect {
-          InputHandler.new(["-f", "spec/fixtures/nonexistent_input.txt"])
-        }.to output(/Error: input file does not exist/).to_stdout.and raise_error(SystemExit)
+    context 'with non-existent file path' do
+      it 'prints an error message and exits' do
+        expect do
+          described_class.new(['-f', 'spec/fixtures/nonexistent_input.txt'])
+        end.to output(/Error: input file does not exist/).to_stdout.and raise_error(SystemExit)
       end
     end
   end

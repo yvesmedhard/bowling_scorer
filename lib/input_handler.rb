@@ -18,7 +18,7 @@ class InputHandler
   def options_parser
     if @options_parser.nil?
       @options_parser = OptionParser.new do |opts|
-        opts.banner = "Usage: #{File.basename($0)} [options] -f FILE"
+        opts.banner = "Usage: #{File.basename($PROGRAM_NAME)} [options] -f FILE"
         opts.on('-f', '--file FILE.txt', 'Path to input text file') do |file_path|
           @options[:file_path] = file_path
         end
@@ -57,11 +57,11 @@ class InputHandler
   end
 
   def read_input_file(file_path)
-    input_data = Hash.new {|hash, key| hash[key] = []}
+    input_data = Hash.new { |hash, key| hash[key] = [] }
     File.foreach(file_path) do |line|
       values = line.chomp.split("\t")
       if values.size != 2
-        puts "Error: invalid input format"
+        puts 'Error: invalid input format'
         exit 1
       end
       input_data[values[0]] << values[1]
