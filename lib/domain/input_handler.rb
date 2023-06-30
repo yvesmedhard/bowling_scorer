@@ -1,31 +1,33 @@
 require 'optparse'
+require 'require_all'
+require_all 'lib/domain'
 
 class InputHandler
-  attr_reader :file_path, :input_data
+  include TenPinInputParser
+  include OptionsConfiguration
+
+  attr_reader :file_path, :game_type
 
   def initialize(args)
-    @options = { file_path: nil }
+    @options = { file_path: nil, game_type: GameType::TEN_PIN }
 
     parse_cli_options!(args)
     validate_file_input(@options[:file_path])
 
     @file_path = @options[:file_path]
-    @input_data = read_input_file(@options[:file_path])
+    @game_type = @options[:game_type]
+  end
+
+  def input_data
+    @input_data ||= read_input_file(@file_path)
   end
 
   private
 
   def options_parser
-    @options_parser ||= @options_parser = OptionParser.new do |opts|
-      opts.banner = "Usage: #{File.basename($PROGRAM_NAME)} [options] -f FILE"
-      opts.on('-f', '--file FILE.txt', 'Path to input text file') do |file_path|
-        @options[:file_path] = file_path
-      end
-      opts.on('-h', '--help', 'Prints this help') do
-        puts opts
-        exit 0
-      end
-    end.freeze
+    @options_parser ||= OptionParser.new do |options|
+      configure_options!(options)
+    end
   end
 
   def parse_cli_options!(args)
@@ -40,19 +42,6 @@ class InputHandler
     valitate_path_existence(file_path)
     validate_extension_name(file_path)
     validate_file_existence(file_path)
-  end
-
-  def read_input_file(file_path)
-    input_data = Hash.new { |hash, key| hash[key] = [] }
-    File.foreach(file_path) do |line|
-      values = line.chomp.split("\t")
-      if values.size != 2
-        puts 'Error: invalid input format'
-        exit 1
-      end
-      input_data[values[0]] << values[1]
-    end
-    input_data
   end
 
   def valitate_path_existence(file_path)
@@ -77,5 +66,9 @@ class InputHandler
     puts "Error: input file does not exist#{"\n" * 2}"
     puts options_parser
     exit 1
+  end
+
+  def game_types
+    GameType.constants.map { |c| GameType.const_get(c) }.join(', ')
   end
 end
