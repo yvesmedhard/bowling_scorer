@@ -1,7 +1,7 @@
-require 'domain/roll'
-require 'domain/frame'
-require 'domain/ten_pin/ten_pin_roll'
-require 'domain/ten_pin/ten_pin_frame'
+require 'bowling_scorer/roll'
+require 'bowling_scorer/frame'
+require 'bowling_scorer/ten_pin/ten_pin_roll'
+require 'bowling_scorer/ten_pin/ten_pin_frame'
 
 FactoryBot.define do
   factory :ten_pin_frame, class: 'TenPinFrame' do

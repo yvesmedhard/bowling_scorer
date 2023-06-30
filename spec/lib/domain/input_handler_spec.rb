@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'domain/input_handler'
+require 'bowling_scorer/input_handler'
 
 RSpec.describe InputHandler do
   describe '#initialize' do

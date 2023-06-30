@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'domain/roll'
-require 'domain/frame'
-require 'domain/ten_pin/ten_pin_frame'
+require 'bowling_scorer/roll'
+require 'bowling_scorer/frame'
+require 'bowling_scorer/ten_pin/ten_pin_frame'
 
 RSpec.describe TenPinFrame do
   describe '#initialize' do

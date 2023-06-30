@@ -21,7 +21,7 @@ class TenPinFrameGenerator
 
   def valid_rolls?(rolls)
     rolls.all? { |roll| roll.is_a?(TenPinRoll) } &&
-      rolls.size.between?(TenPinRoll::MIN_ROLLS, TenPinRoll::MAX_ROLLS)
+      rolls.size.between?(TenPinRollFactory::MIN_ROLLS, TenPinRollFactory::MAX_ROLLS)
   end
 
   def done?

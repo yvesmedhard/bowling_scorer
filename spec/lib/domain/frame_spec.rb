@@ -1,6 +1,6 @@
 require 'spec_helper'
-require 'domain/frame'
-require 'domain/roll'
+require 'bowling_scorer/frame'
+require 'bowling_scorer/roll'
 
 RSpec.describe Frame do
   describe '#previous_frame' do

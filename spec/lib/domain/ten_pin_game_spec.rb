@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'domain/frame'
-require 'domain/roll'
-require 'domain/ten_pin/ten_pin_frame'
-require 'domain/ten_pin/ten_pin_roll'
-require 'domain/game'
-require 'domain/ten_pin/ten_pin_game'
+require 'bowling_scorer/frame'
+require 'bowling_scorer/roll'
+require 'bowling_scorer/ten_pin/ten_pin_frame'
+require 'bowling_scorer/ten_pin/ten_pin_roll'
+require 'bowling_scorer/game'
+require 'bowling_scorer/ten_pin/ten_pin_game'
 
 RSpec.describe TenPinGame do
   describe '#initialize' do

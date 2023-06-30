@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'domain/roll'
+require 'bowling_scorer/roll'
 
 RSpec.describe Roll do
   describe '#pins' do

@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'domain/game_type'
-require 'domain/factory/frame_factory'
-require 'domain/factory/ten_pin/ten_pin_frame_factory'
+require 'bowling_scorer/game_type'
+require 'bowling_scorer/factory/frame_factory'
+require 'bowling_scorer/factory/ten_pin/ten_pin_frame_factory'
 
 RSpec.describe FrameFactory do
   describe '.factory_for' do

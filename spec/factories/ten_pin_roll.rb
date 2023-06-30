@@ -1,4 +1,4 @@
-require 'domain/ten_pin/ten_pin_roll'
+require 'bowling_scorer/ten_pin/ten_pin_roll'
 
 FactoryBot.define do
   factory :ten_pin_roll, class: 'TenPinRoll' do

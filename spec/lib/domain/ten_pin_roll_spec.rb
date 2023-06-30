@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'domain/roll'
+require 'bowling_scorer/roll'
 
 RSpec.describe TenPinRoll do
   describe '#initialize' do
@@ -39,7 +39,7 @@ RSpec.describe TenPinRoll do
       end
 
       it 'raises an TenPinRoll::NotSupportedAttemptNotationError for an invalid character input' do
-        input = ('A'..'Z').to_a.sample
+        input = ('A'..'Z').to_a.delete_if { |i| i == TenPinRoll::FOUL_INPUT }.sample
         expect do
           described_class.new(input)
         end.to raise_error(TenPinRoll::NotSupportedAttemptNotationError, /Invalid input: #{input}/)

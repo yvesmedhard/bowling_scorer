@@ -1,5 +1,5 @@
 require 'require_all'
-require_all 'lib/domain'
+require_all 'lib/bowling_scorer'
 
 begin
   input_handler = InputHandler.new(ARGV)

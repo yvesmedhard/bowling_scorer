@@ -1,10 +1,11 @@
 require 'spec_helper'
-require 'domain/roll'
-require 'domain/frame'
-require 'domain/game_type'
-require 'domain/ten_pin/ten_pin_roll'
-require 'domain/ten_pin/ten_pin_frame'
-require 'domain/factory/ten_pin/ten_pin_frame_generator'
+require 'bowling_scorer/roll'
+require 'bowling_scorer/frame'
+require 'bowling_scorer/game_type'
+require 'bowling_scorer/ten_pin/ten_pin_roll'
+require 'bowling_scorer/ten_pin/ten_pin_frame'
+require 'bowling_scorer/factory/ten_pin/ten_pin_frame_factory'
+require 'bowling_scorer/factory/ten_pin/ten_pin_frame_generator'
 
 RSpec.describe TenPinFrameGenerator do
   describe '#initialize' do

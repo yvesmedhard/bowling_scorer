@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'domain/game_type'
-require 'domain/factory/game_factory'
-require 'domain/factory/ten_pin/ten_pin_game_factory'
+require 'bowling_scorer/game_type'
+require 'bowling_scorer/factory/game_factory'
+require 'bowling_scorer/factory/ten_pin/ten_pin_game_factory'
 
 RSpec.describe GameFactory do
   describe '.factory_for' do

@@ -1,6 +1,6 @@
 require 'optparse'
 require 'require_all'
-require_all 'lib/domain'
+require_all 'lib/bowling_scorer'
 
 class InputHandler
   include TenPinInputParser
