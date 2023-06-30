@@ -1,17 +1,14 @@
 class TenPinRollFactory < RollFactory
   class InvalidNumberOfAttemptsError < StandardError; end
 
-  MIN_ROLLS = 11
-  MAX_ROLLS = 21
-
   def self.game_type
     GameType::TEN_PIN
   end
 
   def create_rolls(attempts)
     unless valid_rolls_size?(attempts)
-      raise InvalidNumberOfAttemptsError,
-            "Invalid number of rolls: #{attempts.size}. Must be between #{MIN_ROLLS} and #{MAX_ROLLS}"
+      raise InvalidNumberOfAttemptsError, "Invalid number of rolls: #{attempts.size}. " \
+                                          "Must be between #{TenPinRoll::MIN_ROLLS} and #{TenPinRoll::MAX_ROLLS}"
     end
 
     attempts.map do |attempt|
@@ -26,7 +23,7 @@ class TenPinRollFactory < RollFactory
   end
 
   def valid_rolls_size?(attempts)
-    attempts.size >= MIN_ROLLS && attempts.size <= MAX_ROLLS
+    attempts.size.between?(TenPinRoll::MIN_ROLLS, TenPinRoll::MAX_ROLLS)
   end
 
   class << self

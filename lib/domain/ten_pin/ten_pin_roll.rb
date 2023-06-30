@@ -1,5 +1,8 @@
 class TenPinRoll
   include Roll
+
+  MIN_ROLLS = 11
+  MAX_ROLLS = 21
   class NotSupportedAttemptNotationError < StandardError; end
 
   VALID_INPUT_REGEX = /(^[0-9]$)|(F)|(^[1][0]$)/

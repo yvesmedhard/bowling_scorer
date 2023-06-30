@@ -1,8 +1,6 @@
 class TenPinFrameGenerator
   attr_reader :frames
 
-  MAX_ROLLS = 21
-  MIN_ROLLS = 11
   NUMBER_OF_FRAMES = 10
   EXTRA_ROLLS = 2
 
@@ -23,7 +21,7 @@ class TenPinFrameGenerator
 
   def valid_rolls?(rolls)
     rolls.all? { |roll| roll.is_a?(TenPinRoll) } &&
-      rolls.size.between?(MIN_ROLLS, MAX_ROLLS)
+      rolls.size.between?(TenPinRoll::MIN_ROLLS, TenPinRoll::MAX_ROLLS)
   end
 
   def done?
