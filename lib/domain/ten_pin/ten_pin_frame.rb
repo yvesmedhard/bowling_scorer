@@ -16,12 +16,4 @@ class TenPinFrame
       previous_frame.total_score + pins_score
     end
   end
-
-  def strike?
-    rolls.first.pins == 10
-  end
-
-  def spare?
-    !strike? && rolls[0..1].sum(&:pins) == 10
-  end
 end

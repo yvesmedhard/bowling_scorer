@@ -1,11 +1,12 @@
 class TenPinRoll
   include Roll
+  class NotSupportedAttemptNotationError < StandardError; end
 
   VALID_INPUT_REGEX = /(^[0-9]$)|(F)|(^[1][0]$)/
   FOUL_INPUT = 'F'.freeze
 
   def initialize(attempt)
-    raise ArgumentError, "Invalid input: #{attempt}" unless valid_input?(attempt)
+    raise NotSupportedAttemptNotationError, "Invalid input: #{attempt}" unless valid_input?(attempt)
 
     @attempt = attempt.freeze
     @pins ||= parse_pins(@attempt).freeze

@@ -24,19 +24,25 @@ RSpec.describe TenPinRoll do
         expect(roll.pins).to eq(0)
       end
 
-      it 'raises an ArgumentError for an invalid input greater than 10' do
+      it 'raises an TenPinRoll::NotSupportedAttemptNotationError for an invalid input greater than 10' do
         input = Random.rand(11..999).to_s
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
+        expect do
+          described_class.new(input)
+        end.to raise_error(TenPinRoll::NotSupportedAttemptNotationError, /Invalid input: #{input}/)
       end
 
-      it 'raises an ArgumentError for an invalid input less than 0' do
+      it 'raises an TenPinRoll::NotSupportedAttemptNotationError for an invalid input less than 0' do
         input = Random.rand(-999...0).to_s
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
+        expect do
+          described_class.new(input)
+        end.to raise_error(TenPinRoll::NotSupportedAttemptNotationError, /Invalid input: #{input}/)
       end
 
-      it 'raises an ArgumentError for an invalid character input' do
+      it 'raises an TenPinRoll::NotSupportedAttemptNotationError for an invalid character input' do
         input = ('A'..'Z').to_a.sample
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
+        expect do
+          described_class.new(input)
+        end.to raise_error(TenPinRoll::NotSupportedAttemptNotationError, /Invalid input: #{input}/)
       end
     end
   end

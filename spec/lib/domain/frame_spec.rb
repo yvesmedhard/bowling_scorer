@@ -28,14 +28,69 @@ RSpec.describe Frame do
   end
 
   describe '#strike?' do
-    it 'raise an NotImplementedError' do
-      expect { TestFrame.new(nil, []).strike? }.to raise_error(NotImplementedError)
+    context 'when the first roll is a strike' do
+      it 'returns true' do
+        frame = build(:ten_pin_frame, :strike)
+        expect(frame.strike?).to be true
+      end
+    end
+
+    context 'when the frame is a spare' do
+      it 'returns false' do
+        frame = build(:ten_pin_frame, :spare)
+        expect(frame.strike?).to be false
+      end
+    end
+
+    context 'when the frame is not a strike or a spare' do
+      it 'returns false' do
+        frame = build(:ten_pin_frame)
+        expect(frame.strike?).to be false
+      end
     end
   end
 
   describe '#spare?' do
-    it 'raise an NotImplementedError' do
-      expect { TestFrame.new(nil, []).spare? }.to raise_error(NotImplementedError)
+    context 'when the first roll is a strike' do
+      it 'returns false' do
+        frame = build(:ten_pin_frame, :strike)
+        expect(frame.spare?).to be false
+      end
+    end
+
+    context 'when the frame is a spare' do
+      it 'returns true' do
+        frame = build(:ten_pin_frame, :spare)
+        expect(frame.spare?).to be true
+      end
+    end
+
+    context 'when the frame is not a strike or a spare' do
+      it 'returns false' do
+        frame = build(:ten_pin_frame)
+        expect(frame.spare?).to be false
+      end
+    end
+  end
+
+  describe '#first_roll' do
+    it 'return the first roll of the frame' do
+      rolls = build_list(:ten_pin_roll, 3, :strike)
+      expect(TestFrame.new(nil, rolls).first_roll).to be rolls.first
+    end
+  end
+
+  describe '#second_roll' do
+    it 'return the first roll of the frame' do
+      rolls = build_list(:ten_pin_roll, 3, :strike)
+      expect(TestFrame.new(nil, rolls).second_roll).to be rolls[1]
+    end
+  end
+
+  describe '#third_roll' do
+    it 'return the first roll of the frame' do
+      rolls = build_list(:ten_pin_roll, 3, :strike)
+      expect(TestFrame.new(nil, rolls).third_roll).to be rolls[2]
     end
   end
 end
