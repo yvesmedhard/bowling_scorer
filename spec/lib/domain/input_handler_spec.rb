@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'input_handler'
+require 'domain/input_handler'
 
 RSpec.describe InputHandler do
   describe '#initialize' do
