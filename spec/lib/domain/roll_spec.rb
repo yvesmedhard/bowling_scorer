@@ -2,42 +2,21 @@ require 'spec_helper'
 require 'domain/roll'
 
 RSpec.describe Roll do
-  describe '#initialize' do
-    context 'with valid input' do
-      it 'sets the attempt attribute for a numeric input' do
-        roll = described_class.new('3')
-        expect(roll.attempt).to eq('3')
-      end
-
-      it 'sets the pins attribute for a numeric input' do
-        roll = described_class.new('3')
-        expect(roll.pins).to eq(3)
-      end
-
-      it 'sets the attempt attribute for an F input' do
-        roll = described_class.new('F')
-        expect(roll.attempt).to eq('F')
-      end
-
-      it 'sets the pins attribute to 0 for an F input' do
-        roll = described_class.new('F')
-        expect(roll.pins).to eq(0)
-      end
-
-      it 'raises an ArgumentError for an invalid input greater than 10' do
-        input = Random.rand(11..999).to_s
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
-      end
-
-      it 'raises an ArgumentError for an invalid input less than 0' do
-        input = Random.rand(-999...0).to_s
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
-      end
-
-      it 'raises an ArgumentError for an invalid character input' do
-        input = ('A'..'Z').to_a.sample
-        expect { described_class.new(input) }.to raise_error(ArgumentError, /Invalid input: #{input}/)
-      end
+  describe '#pins' do
+    it 'returns instance pins' do
+      expect(TestRoll.new(3, '3').pins).to eq(3)
     end
+
+    it 'returns instance attempt' do
+      expect(TestRoll.new(3, '3').attempt).to eq('3')
+    end
+  end
+end
+
+class TestRoll
+  include Roll
+  def initialize(pins, attempt)
+    @pins = pins
+    @attempt = attempt
   end
 end
