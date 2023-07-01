@@ -1,9 +1,7 @@
-class TenPinFrameFactory < FrameFactory
-  class InvalidFrameSequenceError < StandardError; end
+class TenPinFrameFactory
+  include FrameFactory
 
-  def self.game_type
-    GameType::TEN_PIN
-  end
+  class InvalidFrameSequenceError < StandardError; end
 
   def create_frames(rolls)
     frame_generator = TenPinFrameGenerator.new(rolls)

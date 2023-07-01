@@ -10,6 +10,7 @@ module TenPinInputParser
       input_data[values[0]] << values[1]
     end
     raise ArgumentError, 'Error: invalid input format' if input_data.empty?
+
     input_data
   end
 end

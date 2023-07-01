@@ -9,12 +9,6 @@ require 'bowling_scorer/factory/ten_pin/ten_pin_frame_factory'
 require 'bowling_scorer/factory/ten_pin/ten_pin_frame_generator'
 
 RSpec.describe TenPinFrameFactory do
-  describe '.game_type' do
-    it 'returns GameType::TEN_PIN' do
-      expect(described_class.game_type).to eq(GameType::TEN_PIN)
-    end
-  end
-
   describe '#create_frames' do
     context 'with all strike rolls' do
       it 'returns the frames' do

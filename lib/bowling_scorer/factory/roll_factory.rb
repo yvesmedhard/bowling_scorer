@@ -1,22 +1,5 @@
-class RollFactory
-  class UnsupportedGameTypeError < StandardError; end
-
-  def self.factory_for(game_type)
-    factory = descendants.find { |klass| klass.game_type == game_type }
-    raise UnsupportedGameTypeError, "Unsupported game type: #{game_type}" if factory.nil?
-
-    factory.new
-  end
-
-  def self.game_type
+module RollFactory
+  def create_rolls(attempts)
     raise NotImplementedError
-  end
-
-  def create_rolls(data_input)
-    raise NotImplementedError
-  end
-
-  def self.descendants
-    ObjectSpace.each_object(Class).select { |klass| klass < self }
   end
 end

@@ -6,12 +6,6 @@ require 'bowling_scorer/factory/roll_factory'
 require 'bowling_scorer/factory/ten_pin/ten_pin_roll_factory'
 
 RSpec.describe TenPinRollFactory do
-  describe '.game_type' do
-    it 'returns GameType::TEN_PIN' do
-      expect(described_class.game_type).to eq(GameType::TEN_PIN)
-    end
-  end
-
   describe '#create_rolls' do
     let(:all_strikes) { ['10'] * 12 }
 

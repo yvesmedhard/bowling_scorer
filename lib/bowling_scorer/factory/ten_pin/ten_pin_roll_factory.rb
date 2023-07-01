@@ -1,12 +1,10 @@
-class TenPinRollFactory < RollFactory
+class TenPinRollFactory
+  include RollFactory
+
   class InvalidNumberOfAttemptsError < StandardError; end
 
   MIN_ROLLS = 11
   MAX_ROLLS = 21
-
-  def self.game_type
-    GameType::TEN_PIN
-  end
 
   def create_rolls(attempts)
     unless valid_rolls_size?(attempts)
@@ -27,11 +25,5 @@ class TenPinRollFactory < RollFactory
 
   def valid_rolls_size?(attempts)
     attempts.size.between?(MIN_ROLLS, MAX_ROLLS)
-  end
-
-  class << self
-    def self.factory_for(_game_type)
-      raise NotImplementedError, 'Should not be used on child classes'
-    end
   end
 end
