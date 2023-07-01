@@ -1,4 +1,6 @@
-class TenPinGameFactory < GameFactory
+class TenPinGameFactory
+  include GameFactory
+
   def self.game_type
     GameType::TEN_PIN
   end

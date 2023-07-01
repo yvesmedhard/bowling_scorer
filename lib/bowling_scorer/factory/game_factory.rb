@@ -1,14 +1,5 @@
-class GameFactory
-  class UnsupportedGameTypeError < StandardError; end
-
-  def self.factory_for(game_type)
-    factory = descendants.find { |klass| klass.game_type == game_type }
-    raise UnsupportedGameTypeError, "Unsupported game type: #{game_type}" if factory.nil?
-
-    factory.new
-  end
-
-  def self.game_type
+module GameFactory
+  def game_type
     raise NotImplementedError
   end
 
