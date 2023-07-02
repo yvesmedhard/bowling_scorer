@@ -36,7 +36,7 @@ RSpec.describe TenPinGame do
       expect(game.frames.first).to be_an_instance_of(TenPinFrame)
     end
 
-    it 'it captures StandardError and raises it with player reference' do
+    it 'captures StandardError and raises it with player reference' do
       attempts = %w[3 4 5 5 10 7 2 10 10 10 10 10 10 10]
       expect { described_class.new(player, attempts) }.to raise_error(/.* for player #{player}/)
     end

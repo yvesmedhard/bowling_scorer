@@ -20,7 +20,7 @@ module OptionsConfiguration
 
   def configure_game_type_option!(options_parser)
     options_parser.on(
-      '-m', '--mode TEXT', "The game type [#{GameType.factories.keys.join(', ')}]. Defaults to #{GameType.default}]"
+      '-m', '--mode TEXT', "The game type [#{GameType.factories.keys.join(', ')}]. Defaults to #{GameType.default}"
     ) do |game_type|
       @options[:game_type] = game_type unless game_type.nil?
     end
