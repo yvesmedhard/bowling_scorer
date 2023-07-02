@@ -12,14 +12,12 @@ RSpec.describe TenPinFrameFactory do
   describe '#create_frames' do
     context 'with all strike rolls' do
       it 'returns the frames' do
-        build_list(:ten_pin_roll, 12, :strike)
         rolls = build_list(:ten_pin_roll, 12, :strike)
         frames = described_class.new.create_frames(rolls)
         expect(frames.size).to be(10)
       end
 
       it 'allows last frame to have 2 extra rolls' do
-        build_list(:ten_pin_roll, 12, :strike)
         rolls = build_list(:ten_pin_roll, 12, :strike)
         frames = described_class.new.create_frames(rolls)
         expect(frames.last.total_score).to be(300)

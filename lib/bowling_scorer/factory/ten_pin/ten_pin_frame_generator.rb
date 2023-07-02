@@ -1,11 +1,13 @@
 class TenPinFrameGenerator
   attr_reader :frames
 
+  class InvalidRollsSequenceError < StandardError; end
+
   NUMBER_OF_FRAMES = 10
   EXTRA_ROLLS = 2
 
   def initialize(rolls)
-    raise ArgumentError, 'Invalid rolls' unless valid_rolls?(rolls)
+    validate_rolls(rolls)
 
     @remaining_rolls = rolls.clone
     @frames = []
@@ -19,9 +21,9 @@ class TenPinFrameGenerator
 
   private
 
-  def valid_rolls?(rolls)
-    rolls.all? { |roll| roll.is_a?(TenPinRoll) } &&
-      rolls.size.between?(TenPinRollFactory::MIN_ROLLS, TenPinRollFactory::MAX_ROLLS)
+  def validate_rolls(rolls)
+    raise InvalidRollsSequenceError, 'Rolls are of the wrong type' unless rolls.all? { |roll| roll.is_a?(TenPinRoll) }
+    raise InvalidRollsSequenceError, "Wrong number of rolls: #{rolls.size}" unless valid_rolls_size?(rolls)
   end
 
   def done?
@@ -29,10 +31,15 @@ class TenPinFrameGenerator
   end
 
   def create_frame
-    return nil if invalid_last_frame?
+    validate_last_frame
     return create_mark_last_frame if mark? && last_frame?
     return create_strike_frame if strike?
     return create_spare_frame if spare?
+
+    if invalid_pins?
+      raise InvalidRollsSequenceError,
+            "Invalid frame pins combination: #{@remaining_rolls[0..1].sum(&:pins)}"
+    end
 
     create_normal_frame
   end
@@ -53,10 +60,17 @@ class TenPinFrameGenerator
     TenPinFrame.new(frames.last, @remaining_rolls.shift(1 + EXTRA_ROLLS))
   end
 
+  def validate_last_frame
+    return unless invalid_last_frame?
+
+    raise InvalidRollsSequenceError,
+          "Invalid remaining rolls for last frame mark: #{@remaining_rolls.size}"
+  end
+
   def invalid_last_frame?
-    (@frames.size == NUMBER_OF_FRAMES) &&
-      (strike? || spare?) &&
-      last_frame?
+    (strike? || spare?) &&
+      last_frame? &&
+      wrong_remaining_rolls?
   end
 
   def strike?
@@ -65,6 +79,10 @@ class TenPinFrameGenerator
 
   def spare?
     @remaining_rolls[0..1].sum(&:pins) == 10
+  end
+
+  def invalid_pins?
+    @remaining_rolls[0..1].sum(&:pins) > 10
   end
 
   def mark?
@@ -77,5 +95,9 @@ class TenPinFrameGenerator
 
   def wrong_remaining_rolls?
     @remaining_rolls.size != (EXTRA_ROLLS + 1)
+  end
+
+  def valid_rolls_size?(rolls)
+    rolls.size.between?(TenPinRollFactory::MIN_ROLLS, TenPinRollFactory::MAX_ROLLS)
   end
 end
