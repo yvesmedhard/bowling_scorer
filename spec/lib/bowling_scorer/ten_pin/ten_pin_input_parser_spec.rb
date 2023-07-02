@@ -7,21 +7,23 @@ RSpec.describe TenPinInputParser do
       it 'raises an ArgumentError' do
         expect do
           ConcreteParser.new.read_input_file('spec/fixtures/negative/empty.txt')
-        end.to raise_error(ArgumentError, 'Error: invalid input format')
+        end.to raise_error(ArgumentError, 'Error: empty input file')
       end
+    end
 
-      context 'when the input file is not empty but has wrong format' do
-        it 'raises an ArgumentError' do
-          expect do
-            ConcreteParser.new.read_input_file('spec/fixtures/negative/wrong-format.txt')
-          end.to output(/Error: invalid input format/).to_stdout.and raise_error(SystemExit)
-        end
+    context 'when the input file is not empty but has wrong format' do
+      it 'raises an ArgumentError' do
+        expect do
+          ConcreteParser.new.read_input_file('spec/fixtures/negative/wrong-format.txt')
+        end.to output(/Error: invalid input format/).to_stdout.and raise_error(SystemExit)
       end
     end
 
     context 'when the input file is not empty' do
       it 'returns the input data' do
-        expect(ConcreteParser.new.read_input_file('spec/fixtures/positive/perfect.txt')).to eq({ 'Carl' => ['10'] * 12 })
+        expect(ConcreteParser.new.read_input_file(
+                 'spec/fixtures/positive/perfect.txt'
+               )).to eq({ 'Carl' => ['10'] * 12 })
       end
     end
   end

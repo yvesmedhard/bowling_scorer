@@ -1,7 +1,7 @@
 module TenPinInputParser
   def read_input_file(file_path)
     input_data = read_lines(file_path)
-    raise ArgumentError, 'Error: invalid input format' if input_data.empty?
+    raise ArgumentError, 'Error: empty input file' if input_data.empty?
 
     input_data
   end
@@ -11,7 +11,7 @@ module TenPinInputParser
     File.foreach(file_path) do |line|
       values = line.chomp.strip.split("\t")
       if values.size != 2
-        puts 'Error: invalid input format'
+        puts "Error: invalid input format: '#{values.join("\t")}'"
         exit 1
       end
       input_data[values[0]] << values[1]

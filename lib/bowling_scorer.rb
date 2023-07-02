@@ -1,11 +1,16 @@
 require 'require_all'
 require_all 'lib/bowling_scorer'
 
-begin
-  input_handler = InputHandler.new(ARGV)
+class BowlingScorer
+  def initialize(argsv)
+    input_handler = InputHandler.new(argsv)
+    @match = Match.new(input_handler.input_data, input_handler.game_type)
+  rescue StandardError => e
+    puts e.message
+    exit 1
+  end
 
-  match = Match.new(input_handler.input_data, input_handler.game_type)
-  puts MatchSerializer.new(match).serialize
-rescue StandardError => e
-  puts e.message
+  def render
+    puts MatchSerializer.new(@match).serialize
+  end
 end

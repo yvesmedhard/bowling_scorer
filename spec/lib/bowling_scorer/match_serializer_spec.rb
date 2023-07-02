@@ -15,56 +15,46 @@ RSpec.describe MatchSerializer do
   describe '#serialize' do
     it 'returns a string' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to be_a(String)
+      expect(described_class.new(match).serialize).to be_a(String)
     end
 
     it 'returns a string with the correct header' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to match(/#{%w[Frame 1 2 3 4 5 6 7 8 9 10].join("\t\t")}/)
+      expect(described_class.new(match).serialize).to match(/#{%w[Frame 1 2 3 4 5 6 7 8 9 10].join("\t\t")}/)
     end
 
     it 'includes all player names' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to include("Carl\n")
-        .and(include("Jeff\n"))
-        .and(include("Liz\n"))
-        .and(include("Ana\n"))
+      expect(described_class.new(match).serialize).to include("Carl\n").and(include("Jeff\n"))
+                                                                       .and(include("Liz\n")).and(include("Ana\n"))
     end
 
     it 'returns a string with the correct pinfalls for a perfect game' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to match(
+      expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['', 'X'] * 10) << [10, 10]).join("\t")}/
       )
     end
 
     it 'includes a string with the correct pinfalls for a foul game' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to match(
+      expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['F'] * 20)).join("\t")}/
       )
     end
 
     it 'includes a string with the correct pinfalls for a zero game' do
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to match(
+      expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['0'] * 20)).join("\t")}/
       )
     end
 
     it 'includes a string with the correct pinfalls for normal game' do
-      expected = [
-        'Pinfalls','', 'X', '7', '/', '9', '0', '', 'X', '0', '8', '8', '/', 'F', '6', '', 'X', '', 'X', '', 'X', '8', '1'
-      ].join("\t")
+      expected = ['Pinfalls', '', 'X', '7', '/', '9', '0', '', 'X', '0', '8', '8', '/',
+                  'F', '6', '', 'X', '', 'X', '', 'X', '8', '1'].join("\t")
       match = Match.new(valid_match_input_data, GameType.default)
-      serializer = described_class.new(match)
-      expect(serializer.serialize).to match(/#{expected}/)
+      expect(described_class.new(match).serialize).to match(/#{expected}/)
     end
   end
 end
