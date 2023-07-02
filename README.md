@@ -3,6 +3,8 @@ CLI app that scores games of ten-pin bowling.
 
 It takes a text file as input and outputs the scoring for the associated games to the stdout.
 
+> :warning: This project was created as a code challange for hiring process. You can use it to assess my ruby knowledge up to the last change date. :) 
+
 ## Installation
 This project requires:
 - ruby `3.2.2`
