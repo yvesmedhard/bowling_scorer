@@ -18,15 +18,19 @@ RSpec.describe TenPinRollFactory do
     end
 
     it 'raises error when there is more attempts than allowed' do
-      expect do
-        described_class.new.create_rolls(['10'] * 22)
-      end.to raise_error(TenPinRollFactory::InvalidNumberOfAttemptsError)
+      attempts = ['10'] * 22
+      expect { described_class.new.create_rolls(attempts) }.to raise_error(
+        TenPinRollFactory::InvalidNumberOfAttemptsError,
+        /Invalid number of rolls: #{attempts.size}. Must be between.*/
+      )
     end
 
-    it 'raises error when there is more attempts lower than allowed' do
-      expect do
-        described_class.new.create_rolls(['10'] * 10)
-      end.to raise_error(TenPinRollFactory::InvalidNumberOfAttemptsError)
+    it 'raises error when there is less attempts than allowed' do
+      attempts = ['10'] * 10
+      expect { described_class.new.create_rolls(attempts) }.to raise_error(
+        TenPinRollFactory::InvalidNumberOfAttemptsError,
+        /Invalid number of rolls: #{attempts.size}. Must be between.*/
+      )
     end
   end
 end

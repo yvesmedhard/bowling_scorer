@@ -7,7 +7,7 @@ RSpec.describe TenPinInputParser do
       it 'raises an ArgumentError' do
         expect do
           ConcreteParser.new.read_input_file('spec/fixtures/negative/empty_game.txt')
-        end.to raise_error(ArgumentError, 'Error: empty input file')
+        end.to raise_error(ArgumentError, /Error: empty input file/)
       end
     end
 

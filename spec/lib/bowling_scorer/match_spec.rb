@@ -7,7 +7,11 @@ RSpec.describe Match do
   describe '#initialize' do
     context 'when the game type is unsupported' do
       it 'raises an UnsupportedGameTypeError' do
-        expect { described_class.new([], 'FOO') }.to raise_error(GameType::UnsupportedGameTypeError)
+        game_type = 'FOO'
+        expect { described_class.new([], game_type) }.to raise_error(
+          GameType::UnsupportedGameTypeError,
+          /Unsupported game type: #{game_type}/
+        )
       end
     end
 

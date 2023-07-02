@@ -167,21 +167,4 @@ RSpec.describe BowlingScorer do
       end
     end
   end
-
-  # context 'when input file is invalid' do
-  #   context 'with invalid characters present' do
-  #     xit 'raises the corresponding error message' do
-  #     end
-  #   end
-
-  #   context 'with invalid score' do
-  #     xit 'raises the corresponding error message' do
-  #     end
-  #   end
-
-  #   context 'with invalid number of throwings' do
-  #     xit 'raises the corresponding error message' do
-  #     end
-  #   end
-  # end
 end
