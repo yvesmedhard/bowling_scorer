@@ -15,7 +15,7 @@ RSpec.describe Match do
       let(:data_input) { { 'player1' => ['10'] * 12, 'player2' => ['4'] * 20 } }
 
       it 'creates the correct number of games' do
-        match = described_class.new(data_input, GameType.default_game_type)
+        match = described_class.new(data_input, GameType.default)
         expect(match.games.size).to eq(2)
       end
     end

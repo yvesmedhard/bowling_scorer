@@ -57,9 +57,9 @@ class MatchSerializer
 
   def last_pinfall(frame)
     return strike + [frame.second_roll.attempt, frame.third_roll.attempt] if frame.strike?
-    return spare.push(frame.third_roll.attempt) if frame.spare?
+    return spare(frame).push(frame.third_roll.attempt) if frame.spare?
 
-    normal
+    normal(frame)
   end
 
   def strike

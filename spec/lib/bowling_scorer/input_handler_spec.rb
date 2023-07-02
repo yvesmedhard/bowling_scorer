@@ -16,6 +16,20 @@ RSpec.describe InputHandler do
         }
         expect(input_handler.input_data).to eq(expected)
       end
+
+      it 'sets the game_type attribute with the game mode argument' do
+        game_type = GameType.default.to_s
+        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt', '-m', game_type])
+        expect(input_handler.game_type).to eq(game_type)
+      end
+    end
+
+    context 'with help option' do
+      it 'shows the help message' do
+        expect do
+          described_class.new(['-h'])
+        end.to output(/Usage:.*/).to_stdout.and raise_error(SystemExit)
+      end
     end
 
     context 'with missing file argument' do
@@ -30,7 +44,7 @@ RSpec.describe InputHandler do
       it 'prints an error message and exits' do
         expect do
           described_class.new(['-f'])
-        end.to output(%r{Missing argument: -f}).to_stdout.and raise_error(SystemExit)
+        end.to output(/Missing argument: -f/).to_stdout.and raise_error(SystemExit)
       end
     end
 

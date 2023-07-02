@@ -9,7 +9,7 @@ class InputHandler
   attr_reader :file_path, :game_type
 
   def initialize(args)
-    @options = { file_path: nil, game_type: GameType.default_game_type }
+    @options = { file_path: nil, game_type: GameType.default }
 
     parse_cli_options!(args)
     validate_file_input(@options[:file_path])
@@ -66,9 +66,5 @@ class InputHandler
     puts "Error: input file does not exist#{"\n" * 2}"
     puts options_parser
     exit 1
-  end
-
-  def game_types
-    GameType.constants.map { |c| GameType.const_get(c) }.join(', ')
   end
 end
