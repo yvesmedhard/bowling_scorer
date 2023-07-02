@@ -12,4 +12,4 @@ gem 'rubocop-rspec', '~> 2.22'
 
 gem 'require_all', '~> 3.0'
 
-gem "simplecov", "~> 0.22.0"
+gem 'simplecov', '~> 0.22.0'
