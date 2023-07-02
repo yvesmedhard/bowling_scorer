@@ -26,6 +26,14 @@ RSpec.describe InputHandler do
       end
     end
 
+    context 'with missing an option argument' do
+      it 'prints an error message and exits' do
+        expect do
+          described_class.new(['-f'])
+        end.to output(%r{Missing argument: -f}).to_stdout.and raise_error(SystemExit)
+      end
+    end
+
     context 'with invalid file extension' do
       it 'prints an error message and exits' do
         expect do
