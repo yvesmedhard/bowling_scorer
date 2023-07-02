@@ -9,10 +9,4 @@ class TenPinFrameFactory
 
     frame_generator.frames
   end
-
-  class << self
-    def self.factory_for(_game_type)
-      raise NotImplementedError, 'Should not be used on child classes'
-    end
-  end
 end

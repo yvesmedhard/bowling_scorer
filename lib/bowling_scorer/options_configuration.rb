@@ -20,7 +20,7 @@ module OptionsConfiguration
 
   def configure_game_type_option!(options_parser)
     options_parser.on(
-      '-m', '--mode TEXT', "The game type [#{game_types}]. Defaults to #{GameType::TEN_PIN}]"
+      '-m', '--mode TEXT', "The game type [#{game_types}]. Defaults to #{GameType.default_game_type}]"
     ) do |game_type|
       @options[:game_type] = game_type unless game_type.nil?
     end

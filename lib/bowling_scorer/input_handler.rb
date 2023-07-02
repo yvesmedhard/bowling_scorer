@@ -9,7 +9,7 @@ class InputHandler
   attr_reader :file_path, :game_type
 
   def initialize(args)
-    @options = { file_path: nil, game_type: GameType::TEN_PIN }
+    @options = { file_path: nil, game_type: GameType.default_game_type }
 
     parse_cli_options!(args)
     validate_file_input(@options[:file_path])

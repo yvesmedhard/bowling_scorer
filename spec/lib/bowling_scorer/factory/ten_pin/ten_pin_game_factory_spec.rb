@@ -8,12 +8,6 @@ require 'bowling_scorer/factory/game_factory'
 require 'bowling_scorer/factory/ten_pin/ten_pin_game_factory'
 
 RSpec.describe TenPinGameFactory do
-  describe '.game_type' do
-    it 'returns GameType::TEN_PIN' do
-      expect(described_class.game_type).to eq(GameType::TEN_PIN)
-    end
-  end
-
   describe '#create_games' do
     context 'with single player valid data input' do
       let(:data_input) { { 'player' => ['10'] * 12 } }

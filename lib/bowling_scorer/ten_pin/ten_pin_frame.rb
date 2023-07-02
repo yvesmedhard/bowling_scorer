@@ -10,10 +10,8 @@ class TenPinFrame
   end
 
   def total_score
-    if previous_frame.nil?
-      pins_score
-    else
-      previous_frame.total_score + pins_score
-    end
+    return pins_score if previous_frame.nil?
+
+    previous_frame.total_score + pins_score
   end
 end
