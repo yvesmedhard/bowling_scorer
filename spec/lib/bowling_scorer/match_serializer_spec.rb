@@ -18,7 +18,7 @@ RSpec.describe MatchSerializer do
       expect(described_class.new(match).serialize).to be_a(String)
     end
 
-    it 'returns a string with the correct header' do
+    it 'returns a string including the correct header' do
       match = Match.new(valid_match_input_data, GameType.default)
       expect(described_class.new(match).serialize).to match(/#{%w[Frame 1 2 3 4 5 6 7 8 9 10].join("\t\t")}/)
     end
@@ -29,28 +29,28 @@ RSpec.describe MatchSerializer do
                                                                        .and(include("Liz\n")).and(include("Ana\n"))
     end
 
-    it 'returns a string with the correct pinfalls for a perfect game' do
+    it 'returns a string including the correct pinfalls for a perfect game' do
       match = Match.new(valid_match_input_data, GameType.default)
       expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['', 'X'] * 10) << [10, 10]).join("\t")}/
       )
     end
 
-    it 'includes a string with the correct pinfalls for a foul game' do
+    it 'returns a string including the correct pinfalls for a foul game' do
       match = Match.new(valid_match_input_data, GameType.default)
       expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['F'] * 20)).join("\t")}/
       )
     end
 
-    it 'includes a string with the correct pinfalls for a zero game' do
+    it 'returns a string including the correct pinfalls for a zero game' do
       match = Match.new(valid_match_input_data, GameType.default)
       expect(described_class.new(match).serialize).to match(
         /#{(%w[Pinfalls] << (['0'] * 20)).join("\t")}/
       )
     end
 
-    it 'includes a string with the correct pinfalls for normal game' do
+    it 'returns a string including the correct pinfalls for normal game' do
       expected = ['Pinfalls', '', 'X', '7', '/', '9', '0', '', 'X', '0', '8', '8', '/',
                   'F', '6', '', 'X', '', 'X', '', 'X', '8', '1'].join("\t")
       match = Match.new(valid_match_input_data, GameType.default)
