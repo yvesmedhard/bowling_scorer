@@ -5,12 +5,12 @@ RSpec.describe InputHandler do
   describe '#initialize' do
     context 'with valid arguments' do
       it 'sets the file_path attribute' do
-        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt'])
-        expect(input_handler.file_path).to eq('spec/fixtures/positive/perfect.txt')
+        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect_game.txt'])
+        expect(input_handler.file_path).to eq('spec/fixtures/positive/perfect_game.txt')
       end
 
       it 'sets the input_data attribute with file contents' do
-        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt'])
+        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect_game.txt'])
         expected = {
           'Carl' => ['10'] * 12
         }
@@ -19,7 +19,7 @@ RSpec.describe InputHandler do
 
       it 'sets the game_type attribute with the game mode argument' do
         game_type = GameType.default.to_s
-        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect.txt', '-m', game_type])
+        input_handler = described_class.new(['-f', 'spec/fixtures/positive/perfect_game.txt', '-m', game_type])
         expect(input_handler.game_type).to eq(game_type)
       end
     end

@@ -7,6 +7,8 @@ gem 'require_all', '~> 3.0'
 group :development, optional: true do
   gem 'rspec', '~> 3.12'
 
+  gem 'rspec-file_fixtures', '~> 0.1.6'
+
   gem 'rubocop', '~> 1.53'
 
   gem 'factory_bot', '~> 6.2'

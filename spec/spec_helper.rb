@@ -1,5 +1,7 @@
 require 'factory_bot'
 require 'simplecov'
+require 'rspec/file_fixtures'
+
 SimpleCov.start do
   add_filter '/spec/'
 end
